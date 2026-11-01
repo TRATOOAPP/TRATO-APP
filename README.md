@@ -5,11 +5,12 @@ Carpeta: `index.html` (la app), `schema.sql` (base de datos), `terminos.html` y 
 ## 1. Base de datos (Supabase, plan gratis)
 1. Crea cuenta en supabase.com y un proyecto nuevo (región UE).
 2. **SQL Editor** → pega todo `schema.sql` → **Run**.
-3. **Authentication → Providers → Email**: déjalo activado. Para probar rápido puedes desactivar "Confirm email"; en producción mantenlo activado.
+3. **Authentication → Providers → Email**: déjalo activado y con **"Confirm email" activado**. Así, al crear una cuenta se envía un correo de confirmación y no se puede iniciar sesión hasta abrir el enlace. (El texto del correo se edita en **Authentication → Email Templates → Confirm signup**.)
 4. **Project Settings → API**: copia *Project URL* y la clave *anon public*.
 5. Abre `index.html` y rellena arriba del script: `const SB={url:"https://TU-PROYECTO.supabase.co",key:"TU_CLAVE_ANON"}`.
    La clave anon es pública por diseño; la protegen las reglas de seguridad (RLS) del paso 2. **Nunca** pongas la clave `service_role`.
-6. **Authentication → URL Configuration**: pon la dirección final de tu web en *Site URL*.
+6. **Authentication → URL Configuration**: pon la dirección final de tu web en *Site URL* (p. ej. `https://tratoapps.netlify.app`) y añádela también en *Redirect URLs*. Es adonde lleva el enlace del correo de confirmación.
+7. El servidor de correo gratuito de Supabase envía pocos correos por hora y solo para pruebas: para usuarios reales configura un SMTP propio en **Authentication → Emails → SMTP Settings** (Resend, Brevo, etc.).
 
 ## 2. Publicar la web (gratis)
 Cloudflare Pages → *Create project* → *Direct Upload* → sube esta carpeta. (GitHub Pages y Netlify también valen.)
